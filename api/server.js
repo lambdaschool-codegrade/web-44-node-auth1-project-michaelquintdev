@@ -17,6 +17,7 @@ const session = require('express-session')
  */
 
 const server = express();
+const userRouter = require('./users/users-router')
 
 server.use(helmet());
 server.use(express.json());
@@ -32,6 +33,7 @@ server.use(session({
   rolling: true,
   saveUninitialized: false,
 }))
+server.use('/api/users', userRouter)
 
 server.get("/", (req, res) => {
   res.json({ api: "up" });
